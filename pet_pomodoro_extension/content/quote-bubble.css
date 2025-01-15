@@ -1,0 +1,125 @@
+/************************************************
+ *   MAIN BUBBLE + MINIMIZE LOGIC
+ ************************************************/
+.quote-bubble {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
+  width: 280px; /* default width */
+  transition: width 0.3s ease, height 0.3s ease;
+}
+
+/* When minimized: only show the icon, hide bubble-content */
+.quote-bubble.minimized {
+  width: 48px; /* match the icon's size */
+}
+.quote-bubble.minimized .bubble-content {
+  display: none; /* hides text, pointer, etc. */
+}
+
+/************************************************
+ *   CAT ICON (ALWAYS VISIBLE)
+ ************************************************/
+.icon-circle {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #FF9494; /* Pink cat icon */
+  border: 3px solid #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-bottom: 8px; /* spacing above bubble-content */
+  transition: transform 0.3s ease;
+}
+.icon-circle:hover {
+  transform: scale(1.05);
+}
+
+/************************************************
+ *   BUBBLE CONTENT (HIDDEN WHEN MINIMIZED)
+ ************************************************/
+.bubble-content {
+  background: #fff;
+  padding: 18px;
+  border-radius: 18px;
+  border: 2px solid #e5e7eb;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+/* Pointer (triangle) */
+.bubble-pointer {
+  position: absolute;
+  top: -10px;
+  left: 30px;
+  width: 18px;
+  height: 18px;
+  background: #fff;
+  transform: rotate(45deg);
+  border-top: 2px solid #e5e7eb;
+  border-left: 2px solid #e5e7eb;
+}
+
+/* Hover effect on bubble content */
+.bubble-content:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+/************************************************
+ *   QUOTE TEXT & REFRESH BUTTON
+ ************************************************/
+.quote-text {
+  margin: 0 0 12px 0;
+  color: #374151;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.refresh-button {
+  background: none;
+  border: none;
+  color: #FF9494;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  padding: 0;
+  transition: all 0.3s ease;
+}
+.refresh-button:hover {
+  color: #ff7070;
+  transform: translateX(2px);
+}
+
+.refresh-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 6px;
+}
+.refresh-icon.spinning {
+  animation: spin 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/************************************************
+ *   FADE-IN QUOTE ANIMATION
+ ************************************************/
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.quote-text.changing {
+  animation: fadeIn 0.3s ease-out forwards;
+}
